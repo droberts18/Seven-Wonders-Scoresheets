@@ -1,12 +1,12 @@
 // number of players in a game
-var numPlayers = 7;
+var numPlayers;
 
 // asking user for number of players, checks to make sure that the entered value is a number between 2 and 7 inclusive
-/*
+
 do {
     numPlayers = prompt('Enter the number of people playing:');
 } while (isNaN(numPlayers) || numPlayers < 2 || numPlayers > 7);
-*/
+
 
 var table = document.createElement('table');
 var tbody = document.createElement('tbody');
@@ -61,7 +61,7 @@ for(var i = 0; i < scoringCategories.length; i++){
         var input = document.createElement('input');
         input.setAttribute('class', 'player' + (j+1) + 'Score');
         input.setAttribute('type', 'number')
-        input.setAttribute('value', 0);
+        input.setAttribute('value', '');
         input.setAttribute('min', 0);
         input.setAttribute('max', 999);
 
@@ -108,7 +108,9 @@ function changeTotal(className){
     var playersScoreInputs = document.getElementsByClassName(className);
 
     for(var i = 0; i < playersScoreInputs.length; i++) {
-        totalScore = totalScore + parseInt(playersScoreInputs[i].value);
+        if(playersScoreInputs[i].value != '') {
+            totalScore = totalScore + parseInt(playersScoreInputs[i].value);
+        }
     }
 
     totalCell.innerHTML = totalScore;
