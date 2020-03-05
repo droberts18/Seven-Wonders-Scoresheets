@@ -27,7 +27,7 @@ for(var i = 0; i < numPlayers; i++){
     var form = document.createElement('form');
     var input = document.createElement('input');
     input.setAttribute('type', 'text')
-    input.setAttribute('value', 'Player ' + (i+1));
+    input.setAttribute('value', 'P' + (i+1));
 
     form.appendChild(input);
     td.appendChild(form);
