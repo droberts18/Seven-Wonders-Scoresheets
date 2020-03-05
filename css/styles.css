@@ -1,0 +1,42 @@
+table, th, td {
+    border: 1px solid black;
+}
+
+th, td {
+    width: 120px;
+    height: 80px;
+}
+
+#military {
+    background-color: red;
+}
+
+#coinImg {
+    width: 80px;
+    height: 80px;
+}
+
+#stagesImg {
+    width: 80px;
+    height: 80px;
+}
+
+#civStructs {
+    background-color: royalblue;
+}
+
+#comStructs {
+    background-color: yellow;
+}
+
+#guilds {
+    background-color: purple;
+}
+
+#science {
+    background-color: green;
+}
+
+.playerTotal {
+    text-align: center;
+}
