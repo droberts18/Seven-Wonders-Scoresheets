@@ -11,6 +11,19 @@ input {
     width: 75px;
 }
 
+@media only screen 
+and (min-device-width : 320px) 
+and (max-device-width : 480px) {
+    th, td {
+        width: 30px;
+        height: 20px;
+    }
+
+    input {
+        width: 30px;
+    }
+}
+
 #military {
     background-color: red;
 }
