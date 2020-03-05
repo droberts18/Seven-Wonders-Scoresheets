@@ -46,10 +46,10 @@ for(var i = 0; i < scoringCategories.length; i++){
     scoringCatTh.setAttribute('id', scoringCategories[i]);
 
     if(scoringCategories[i] == 'coins'){
-        scoringCatTh.innerHTML = '<img id="coinImg" src="img/coin.png" alt="Coins" />';
+        scoringCatTh.innerHTML = '<img id="coinImg" src="img/coin.png" alt="Coins" style="width: 20px; height: 20px;"/>';
     }
     else if(scoringCategories[i] == 'stages'){
-        scoringCatTh.innerHTML = '<img id="stagesImg" src="img/stages.png" alt="Stages" />'
+        scoringCatTh.innerHTML = '<img id="stagesImg" src="img/stages.png" alt="Stages" style="width: 20px; height: 20px;"/>';
     }
 
     tr.append(scoringCatTh);

@@ -3,8 +3,12 @@ table, th, td {
 }
 
 th, td {
-    width: 120px;
-    height: 80px;
+    width: 75px;
+    height: 20px;
+}
+
+input {
+    width: 75px;
 }
 
 #military {
