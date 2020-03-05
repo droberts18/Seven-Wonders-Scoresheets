@@ -7,7 +7,6 @@ do {
     numPlayers = prompt('Enter the number of people playing:');
 } while (isNaN(numPlayers) || numPlayers < 2 || numPlayers > 7);
 
-
 var table = document.createElement('table');
 var tbody = document.createElement('tbody');
 
@@ -19,10 +18,12 @@ var namesTr = document.createElement("tr");
 // start with "NAME" cell
 var namesTh = document.createElement('th');
 namesTh.innerHTML = "NAME";
+
 namesTr.appendChild(namesTh);
 // fill the rest with blank spaces for every player in the game
 for(var i = 0; i < numPlayers; i++){
     var td = document.createElement('td');
+    td.setAttribute('class', 'playerInputTd');
 
     var form = document.createElement('form');
     var input = document.createElement('input');
@@ -56,6 +57,7 @@ for(var i = 0; i < scoringCategories.length; i++){
 
     for(var j = 0; j < numPlayers; j++){
         var td = document.createElement('td');
+        td.setAttribute('class', 'playerInputTd');
 
         var form = document.createElement('form');
         var input = document.createElement('input');
@@ -99,6 +101,28 @@ table.appendChild(tbody);
 
 var body = document.getElementsByTagName('BODY')[0];
 body.appendChild(table);
+
+setProportionalWidthAndHeight();
+
+function setProportionalWidthAndHeight(){
+    // calculating the width and height for each cell based off screen size
+    var cellSizeWidth = screen.width / numPlayers+1;
+    var cellSizeHeight = (screen.height / numPlayers+1) / 10;
+
+    var tdCells = document.getElementsByTagName('td');
+
+    for(var i = 0; i < tdCells.length; i++){
+        tdCells[i].setAttribute('width', cellSizeWidth);
+        tdCells[i].setAttribute('height', cellSizeHeight);
+    }
+    var thCells = document.getElementsByTagName('th');
+
+    for(var i = 0; i < thCells.length; i++){
+        thCells[i].setAttribute('width', cellSizeWidth);
+        thCells[i].setAttribute('height', cellSizeHeight);
+    }
+
+}
 
 function changeTotal(className){
     var totalCell = document.getElementById(className + 'Total');
