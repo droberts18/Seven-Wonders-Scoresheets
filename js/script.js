@@ -1,7 +1,9 @@
 // number of players in a game
-var numPlayers;
+var numPlayers = 3;
 // array of scoring categories in the game
 let scoringCategories = ['Military','Coins','Stages','Civilian_Structures','Commercial_Structures','Guilds','Science','Total'];
+// keeps track of next available tab index
+var tabIndx = 1;
 
 // asking user for number of players, checks to make sure that the entered value is a number between 2 and 7 inclusive
 do {
@@ -17,10 +19,12 @@ for(var i = 0; i < numPlayers; i++){
     playerNames.push(playerName);
 }
 
+
+
 var flexContain = document.createElement('div');
 flexContain.setAttribute('id', 'flexBox');
 
-createColumns(flexContain);
+createSheet(flexContain);
 
 var body = document.getElementsByTagName('BODY')[0];
 body.appendChild(flexContain);
@@ -28,7 +32,7 @@ body.appendChild(flexContain);
 // unable to do this before adding the flex container to the body
 addCoinsAndStagesPics();
 
-function createColumns(flexContainer){
+function createSheet(flexContainer){
     // creating first column
     var labelColumn = document.createElement('div');
     labelColumn.setAttribute('class', 'column');
@@ -43,7 +47,10 @@ function createColumns(flexContainer){
     createScoringCategoryCells(labelColumn);
     flexContainer.appendChild(labelColumn);
 
-    for(var i = 0; i < numPlayers; i++){
+    var playerColumns = [];
+
+    // creating all player columns first
+    for(var i = 0; i < numPlayers; i++) {
         var col = document.createElement('div');
         col.setAttribute('class', 'column');
 
@@ -53,12 +60,39 @@ function createColumns(flexContainer){
         playerNameHeader.innerHTML = playerNames[i];
         playerNameHeader.classList.add('cell', 'nameOrTotalRow');
         col.appendChild(playerNameHeader);
+        // adding column to array of all player columns
+        playerColumns.push(col);
+    }
 
-        createColumnCells(col, i+1);
+    createPlayerInputCells(playerColumns);
+    createPlayerTotalCells(playerColumns);
 
-        flexContainer.appendChild(col);
+    for(var i = 0; i < playerColumns.length; i++){
+        flexContainer.appendChild(playerColumns[i]);
     }
 }
+
+function createPlayerInputCells(playerColumns){
+    // creates all input cells for all players
+    for(var i = 0; i < (numPlayers*7); i++){
+        var playerIndex = (i % numPlayers);
+        var cell = createCell('player' + (playerIndex+1));
+
+        createNumberInputInCell(cell, (playerIndex+1));
+        playerColumns[playerIndex].appendChild(cell);
+    }
+}
+
+function createPlayerTotalCells(playerColumns){
+    for(var i = 0; i < numPlayers; i++){
+        var totalCell = createCell('totalCell');
+        totalCell.setAttribute('id', 'player' + (i+1) + 'Total');
+        totalCell.classList.add('nameOrTotalRow');
+        totalCell.innerHTML = 0;
+        playerColumns[i].appendChild(totalCell);
+    }
+}
+
 
 function createCell(typeOfCell){
     var cell = document.createElement('div');
@@ -86,29 +120,16 @@ function createScoringCategoryCells(scoreCategoryColumn){
     scoreCategoryColumn.appendChild(totalLabelCell);
 }
 
-function createColumnCells(column, playerNumber){
-    // creates all cells in column that allow for input
-    for(var i = 0; i < scoringCategories.length-1; i++){
-        var cell = createCell('player' + playerNumber);
-        createNumberInputInCell(cell, playerNumber);
-        column.appendChild(cell);
-    }
-    // creating the last cell in the column, the Total cell
-    var totalCell = createCell('totalCell');
-    totalCell.setAttribute('id', 'player' + playerNumber + 'Total');
-    totalCell.classList.add('nameOrTotalRow');
-    totalCell.innerHTML = 0;
-    column.appendChild(totalCell);
-}
-
 function createNumberInputInCell(cell, playerNumber){
     var form = document.createElement('form');
+
     var input = document.createElement('input');
     input.setAttribute('class', 'player' + playerNumber + 'Input');
     input.setAttribute('type', 'number');
     input.setAttribute('min', 0);
     input.setAttribute('max', 999);
     input.setAttribute('value', '');
+    input.tabIndex = tabIndx++;
 
     // remains as a constant, otherwise the variable's value changes over iteration
     const inputPlayerClassName = input.getAttribute('class');
@@ -119,6 +140,26 @@ function createNumberInputInCell(cell, playerNumber){
     });
 
     form.appendChild(input);
+
+    form.onkeypress = function(e){
+        if(e.which === 13){
+            e.preventDefault();
+            var curIndex = this.getElementsByTagName('input')[0].tabIndex;
+
+            var tabbables = document.getElementsByTagName('input');
+            // if we are on the last tabbable element, go back to the beginning
+            if(curIndex == tabbables.length){
+                curIndex = 0;
+            }
+            for(var i = 0; i < tabbables.length; i++){
+                if(tabbables[i].tabIndex == (curIndex + 1)){
+                    tabbables[i].focus();
+                    break;
+                }
+            }
+        }
+    }
+
     cell.appendChild(form);
 }
 
