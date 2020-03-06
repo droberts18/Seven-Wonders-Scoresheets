@@ -19,25 +19,27 @@ body {
     display: flex;
     flex-direction: column;
     background-color: tan;
-    height: 50%;
+    height: 65%;
     width: 100%;
 }
 
 #scoreCategoryColumn {
-    width: 100px;
+    width: 25%;
 }
 
 .cell {
     border: solid #000000;
-    padding: 5px;
     min-width: 15px;
-    height: 50%;
+    height: 100%;
     width: 100%;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 55px;
 }
 
 .cell input {
     height: 100%;
-    width: 50%;
+    width: 25%;
 }
 
 #Military {
@@ -68,45 +70,11 @@ body {
     background-color: green;
 }
 
-/* table, th, td {
-    border: 1px solid black;
+img {
+    max-width: 100%;
+    max-height: 100%;
 }
 
-#military {
-    background-color: red;
+.nameOrTotalRow {
+    height: 300px;
 }
-
-#coinImg {
-    width: 80px;
-    height: 80px;
-}
-
-#stagesImg {
-    width: 80px;
-    height: 80px;
-}
-
-#civStructs {
-    background-color: royalblue;
-}
-
-#comStructs {
-    background-color: yellow;
-}
-
-#guilds {
-    background-color: purple;
-}
-
-#science {
-    background-color: green;
-}
-
-.playerInputTd {
-    text-align: center;
-    vertical-align: middle;
-}
-
-.playerTotal {
-    text-align: center;
-} */
