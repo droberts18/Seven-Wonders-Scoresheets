@@ -1,5 +1,5 @@
 // number of players in a game
-var numPlayers = 4;
+var numPlayers;
 // array of scoring categories in the game
 let scoringCategories = ['Military','Coins','Stages','Civilian_Structures','Commercial_Structures','Guilds','Science','Total'];
 
@@ -7,6 +7,15 @@ let scoringCategories = ['Military','Coins','Stages','Civilian_Structures','Comm
 do {
     numPlayers = prompt('Enter the number of people playing:');
 } while (isNaN(numPlayers) || numPlayers < 2 || numPlayers > 7);
+
+// declaring array to hold all player names entered in
+var playerNames = [];
+
+// prompting user to enter in all names of players in the game
+for(var i = 0; i < numPlayers; i++){
+    var playerName = prompt('Enter in Player ' + (i+1) + "'s name.");
+    playerNames.push(playerName);
+}
 
 var flexContain = document.createElement('div');
 flexContain.setAttribute('id', 'flexBox');
@@ -40,7 +49,8 @@ function createColumns(flexContainer){
 
         // creating player name header for column
         var playerNameHeader = document.createElement('div');
-        playerNameHeader.innerHTML = 'P' + (i+1);
+        // add label for corresponding player name
+        playerNameHeader.innerHTML = playerNames[i];
         playerNameHeader.classList.add('cell', 'nameOrTotalRow');
         col.appendChild(playerNameHeader);
 
